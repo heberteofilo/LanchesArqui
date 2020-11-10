@@ -1,0 +1,15 @@
+﻿@model CarrinhoCompraViewModel
+
+@if (Model.CarrinhoCompra.CarrinhoCompraItens.Count > 0)
+{
+    <li>
+        <a asp-controller="CarrinhoCompra" aria-label="Left Align">
+            <span aria-hidden="true" class="nav-item" style="margin-left:2rem">
+                <img src="~/images/cart9white.png" width="35" height="35" style="margin: 0.25rem" class="img-fluid"/>
+            </span>
+            <span id="cart-status" class="text-white">
+                <sup>@Model.CarrinhoCompra.CarrinhoCompraItens.Count</sup>
+            </span>
+        </a>
+    </li>
+}

@@ -1,0 +1,13 @@
+﻿@model LancheListViewModel
+
+<div><h2>@Model.CategoriaAtual</h2></div>
+
+
+<div class="row" style="margin-top: 1rem">
+    @foreach (var lanche in Model.Lanches) // acessa o tipo da view Lanche
+    {
+        @*@Html.Partial("_LanchesResumo", lanche);*@
+        <partial name="_LanchesResumo" for="@lanche" />
+    }
+</div>
+

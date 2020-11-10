@@ -1,0 +1,34 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using Microsoft.AspNetCore.Identity.EntityFrameworkCore
+@using Microsoft.AspNetCore.Http
+
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+
+<ul class="navbar-nav">
+    @if (SignInManager.IsSignedIn(User))
+    {
+        <li class="nav-item">
+            <form asp-area="" asp-controller="Account" asp-action="Logout" id="logoutForm"
+                  method="post" class="navbar-right">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a class="text-white" style="margin: 0 0 0 20px">Olá, @UserManager.GetUserName(User).ToLower()</a>
+                        <a class="text-white text-decoration-none" style="font-size:18px" href="javascript:document.getElementById('logoutForm').submit()">
+                            <span style="padding: 0 0 0 20px">Logout</span>
+                        </a>
+                    </li>
+                </ul>
+            </form>
+        </li>
+    }
+    else
+    {
+        <li class="nav-item">
+            <a class="text-white text-decoration-none " style="padding:0 10px 0 30px" id="registerLink" asp-controller="Account" asp-action="Register"><span style="font-size:18px">Registrar</span></a>
+        </li>
+        <li class="nav-item">
+            <a class="text-white border-white text-decoration-none" style="font-size:18px" id="loginLink" asp-controller="Account" asp-action="Login">Login</a>
+        </li>
+    }
+</ul>

@@ -1,0 +1,73 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - LanchesArqui</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark border-bottom box-shadow mb-3" role="navigation">
+            <div class="container">
+                <a class="navbar-brand font-weight-bold" style="margin-bottom:0.5rem" asp-area="" asp-controller="Home" asp-action="Index">
+                    <big><span style="font-family:'Lucida Sans'">LanchesArqui</span></big>
+                </a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+                    <ul class="nav navbar-nav flex-grow-1" style="align-items:center">
+                        <li class="nav-item" style="margin-left:1rem">
+                            <a class="nav-link text-white font-weight-bold" style="font-family:'Lucida Sans'" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                        </li>
+                        @await Component.InvokeAsync("CategoriaMenu")
+                        <li class="nav-item" style="margin-left:1rem">
+                            <a class="nav-link text-white font-weight-bold" style="font-family:'Lucida Sans'" asp-area="" asp-controller="Contato" asp-action="Index">Contato</a>
+                        </li>
+                        @if (User.IsInRole("Admin"))
+                        {
+                            <li class="nav-item" style="font-family:'Lucida Sans'">
+                                <a class="text-white" style="font-size:18px" asp-area="Admin" asp-controller="Admin" asp-action="Index">
+                                    <span style="padding:0 1rem 0 1rem">Admin</span>
+                                </a>
+                            </li>
+                        }
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            @await Component.InvokeAsync("CarrinhoCompraResumo")
+                        }
+                    </ul>
+
+                </div>
+                <form class="navbar-form navbar-right nav-item" style="margin-top:1rem" asp-controller="Lanche" asp-action="Search" method="get">
+                    <div class="row form-group" style="padding-right:1.5rem">
+                        <input type="text" class="form-control" placeholder="Procurar lanche" name="searchString" value="@ViewData["searchString"]">
+                    </div>
+                </form>
+                <span class="text-white nav-item" style="font-size:18px"><a style="font-family:'Lucida Sans'">Search</a></span>
+                <span style="font-family:'Lucida Sans'">
+                    <partial name="_LoginPartial" />
+                </span>
+            </div>
+        </nav>
+    </header>
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="border-top footer text-muted">
+        <div class="container">
+            &copy; 2020 - LanchesArqui - <a asp-area="" asp-controller="Contato" asp-action="Index">Contato</a>
+        </div>
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @RenderSection("Scripts", required: false)
+</body>
+</html>
